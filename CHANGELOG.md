@@ -6,6 +6,12 @@ All notable changes are documented here. Format loosely follows [Keep a Changelo
 
 > Development identity: `v2.17.0-dev.1`. Not a stable release.
 
+### Added
+- **Kiro visual preset.** `kiro` uses the Kiro IDE's Kiro Dark and Kiro Light themes: violet accents, charcoal and lavender-grey surfaces, node colors from the Kiro syntax palette, the Kiro app icon as the header mark, and a Kiro ghost in the diagram's top-right corner that stays out of exported SVGs.
+
+### Changed
+- **Default visual preset is now `kiro`.** Diagrams that omit `meta.visual_preset` open in `kiro`; set `classic` to keep the previous look.
+
 ### Fixed
 - **Architecture Delta baseline arrowheads (#433).** Removed and rerouted baseline relationships retain their marker definitions in the composed Delta SVG, preserving their authored direction alongside current relationships.
 - **Compare rollback recovery (#438).** If restoring a previous output fails, compare preserves its recovery directory and reports backup-to-target paths instead of deleting the remaining backups during cleanup.

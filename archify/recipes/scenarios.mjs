@@ -1,7 +1,7 @@
 const RAW_RECIPES = [
   {
     id: 'system-overview', type: 'architecture', proof: 'web-app',
-    presentation: { preset: 'classic', motion: 'static', views: 'optional' },
+    presentation: { preset: 'kiro', motion: 'static', views: 'optional' },
     start: {
       en: { descriptionPrompt: 'Use Archify to turn this plain-language system description into a high-level architecture diagram: [describe the users, core components, primary path, external dependencies, and boundaries]. No repository is required. Ask only for missing facts that would materially change the diagram, mark any remaining unknowns instead of inventing them, and keep one obvious primary path across 8–12 core components.' },
       zh: { descriptionPrompt: '用 Archify 把下面这段自然语言系统描述画成高层架构图：[在这里描述用户、核心组件、主要路径、外部依赖和边界]。不需要代码库。只追问会实质影响图的缺失信息，其余不确定内容要标明而不是编造；保留 8–12 个核心组件和一条一眼可见的主路径。' },
@@ -72,7 +72,7 @@ const RAW_RECIPES = [
   },
   {
     id: 'delivery-workflow', type: 'workflow', proof: 'delivery-workflow',
-    presentation: { preset: 'classic', motion: 'trace', views: 'optional' },
+    presentation: { preset: 'kiro', motion: 'trace', views: 'optional' },
     signals: [['ci/cd', 14], ['release workflow', 14], ['deployment pipeline', 11], ['pull request', 7], ['staging', 7], ['rollback', 8], ['发布流程', 14], ['流水线', 9], ['上线', 7], ['预发', 7], ['回滚', 8], ['审批发布', 10]],
     en: {
       title: 'Delivery workflow', question: 'How does a change move safely from commit to production?',
@@ -114,7 +114,7 @@ const RAW_RECIPES = [
   },
   {
     id: 'api-request', type: 'sequence', proof: 'cache-miss',
-    presentation: { preset: 'classic', motion: 'trace', views: 'optional' },
+    presentation: { preset: 'kiro', motion: 'trace', views: 'optional' },
     start: {
       en: { descriptionPrompt: 'Use Archify sequence mode to draw this interaction: [paste the participants, calls, returns, fallback, and asynchronous side effects]. Keep message order unambiguous, labels short, and unknown behavior explicit. No repository is required.' },
       zh: { descriptionPrompt: '用 Archify 时序模式绘制下面的交互：[粘贴参与者、调用、返回、回退和异步副作用]。确保消息顺序无歧义、标签简短，并明确标注未知行为。不需要代码库。' },
@@ -160,7 +160,7 @@ const RAW_RECIPES = [
   },
   {
     id: 'data-lineage', type: 'dataflow', proof: 'product-analytics',
-    presentation: { preset: 'classic', motion: 'trace', views: 'recommended' },
+    presentation: { preset: 'kiro', motion: 'trace', views: 'recommended' },
     signals: [['data lineage', 15], ['etl', 12], ['warehouse', 9], ['pii', 11], ['governance', 9], ['analytics pipeline', 12], ['数据血缘', 15], ['数据管道', 11], ['数仓', 9], ['治理', 9], ['隐私数据', 10], ['用户同意', 9]],
     en: {
       title: 'Data lineage', question: 'Where does data come from, how does it change, and who consumes it?',
@@ -206,7 +206,7 @@ const RAW_RECIPES = [
   },
   {
     id: 'object-lifecycle', type: 'lifecycle', proof: 'agent-run',
-    presentation: { preset: 'classic', motion: 'trace', views: 'optional' },
+    presentation: { preset: 'kiro', motion: 'trace', views: 'optional' },
     start: {
       en: { descriptionPrompt: 'Use Archify lifecycle mode to model this object: [paste its states, transition events, waits, retries, cancellation, and terminal outcomes]. Separate active, waiting, recoverable-failure, and terminal states, and never hide an ending. No repository is required.' },
       zh: { descriptionPrompt: '用 Archify 生命周期模式建模这个对象：[粘贴它的状态、转换事件、等待、重试、取消和终态]。分开执行、等待、可恢复失败和终态，不要隐藏任何结束方式。不需要代码库。' },

@@ -3,6 +3,7 @@
   "diagram_type": "sequence",
   "meta": {
     "title": "Cache Miss Request Sequence",
+    "visual_preset": "classic",
     "output": "examples/sequence-cache-miss-request.html",
     "viewBox": [1080, 560],
     "column_fit": "spread",

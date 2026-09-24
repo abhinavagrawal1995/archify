@@ -67,7 +67,7 @@ for (const item of CASES) {
     title: source.meta.title,
     subtitle: source.meta.subtitle || '',
     schemaVersion: source.schema_version,
-    visualPreset: source.meta.visual_preset || 'classic',
+    visualPreset: source.meta.visual_preset || 'kiro',
     animation: source.meta.animation || 'static',
     engineeringProfile: source.meta.engineering_profile || null,
     viewCount: Array.isArray(source.meta.views) ? source.meta.views.length : 0,

@@ -52,10 +52,10 @@ test('static output omits animation attributes', () => {
   assert.doesNotMatch(svg, /data-animate=/);
 });
 
-test('classic preset remains the default for existing diagrams', () => {
+test('kiro preset is the default for diagrams without a visual preset', () => {
   const html = render('architecture', CASES.architecture, null, null);
-  assert.match(html, /<html lang="en" data-theme="dark" data-preset="classic">/);
-  assert.match(svgBlock(html), /data-preset="classic"/);
+  assert.match(html, /<html lang="en" data-theme="dark" data-preset="kiro">/);
+  assert.match(svgBlock(html), /data-preset="kiro"/);
 });
 
 test('signal-flow preset reaches the page, SVG, and motion export surface', () => {
@@ -113,6 +113,20 @@ test('blueprint preset is accepted by all five typed renderers', () => {
     const html = render(mode, example, null, 'blueprint');
     assert.match(html, /data-preset="blueprint"/, mode);
     assert.match(svgBlock(html), /data-preset="blueprint"/, mode);
+  }
+});
+
+test('kiro preset reaches every visual surface and all five typed renderers', () => {
+  for (const [mode, example] of Object.entries(CASES)) {
+    const html = render(mode, example, null, 'kiro');
+    assert.match(html, /<html lang="en" data-theme="dark" data-preset="kiro">/, mode);
+    assert.match(svgBlock(html), /data-preset="kiro"/, mode);
+    assert.match(html, /\[data-preset="kiro"\]\[data-theme="dark"\]/, mode);
+    assert.match(html, /\[data-preset="kiro"\]\[data-theme="light"\]/, mode);
+    assert.match(html, /html\[data-preset="kiro"\] \.pulse-dot/, mode);
+    assert.match(html, /html\[data-preset="kiro"\] \.diagram-container::before/, mode);
+    assert.match(html, /html\[data-preset="kiro"\] \.card/, mode);
+    assert.match(html, /svg\[data-preset="kiro"\] \.c-region/, mode);
   }
 });
 

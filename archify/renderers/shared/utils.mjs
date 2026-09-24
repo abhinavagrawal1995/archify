@@ -129,7 +129,7 @@ export function applyTemplate(template, {
   svg,
   cards,
   locale,
-  visualPreset = 'classic',
+  visualPreset = 'kiro',
   guidedViews = [],
   sourceEvidence = null,
 }) {

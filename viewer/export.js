@@ -292,7 +292,7 @@
         function resolveVars(themeAttr) {
           var probe = document.createElement('div');
           probe.setAttribute('data-theme', themeAttr);
-          probe.setAttribute('data-preset', document.documentElement.getAttribute('data-preset') || 'classic');
+          probe.setAttribute('data-preset', document.documentElement.getAttribute('data-preset') || 'kiro');
           probe.style.cssText = 'position:absolute;width:0;height:0;visibility:hidden;';
           document.body.appendChild(probe);
           try {
@@ -543,7 +543,7 @@
                       hops: viewerCount('viewer.export.card.hop', reachSnapshot.maxDepth)
                     })
                   : subtitleNode ? subtitleNode.textContent : '';
-              var preset = document.documentElement.getAttribute('data-preset') || 'classic';
+              var preset = document.documentElement.getAttribute('data-preset') || 'kiro';
               var theme = document.documentElement.getAttribute('data-theme') || 'dark';
               var presetKey = preset === 'signal-flow'
                 ? 'viewer.preset.flow.short'

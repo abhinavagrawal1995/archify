@@ -456,7 +456,7 @@ try {
       var guidedActivated = Archify.guidedViews.activate('main', { updateUrl: false });
       var guidedActive = Archify.guidedViews.active();
       var visualMatrix = [];
-      for (var preset of ['classic', 'signal-flow', 'blueprint', 'editorial']) {
+      for (var preset of ['classic', 'signal-flow', 'blueprint', 'editorial', 'kiro']) {
         if (!Archify.preset.apply(preset)) throw new Error('could not apply preset ' + preset);
         for (var theme of ['dark', 'light']) {
           document.documentElement.setAttribute('data-theme', theme);
@@ -511,7 +511,7 @@ try {
     assert.equal(runtime.lensOpen, false);
     assert.equal(runtime.guidedActivated, true);
     assert.equal(runtime.guidedActive, 'main');
-    assert.equal(runtime.visualMatrix.length, 8);
+    assert.equal(runtime.visualMatrix.length, 10);
     for (const entry of runtime.visualMatrix) {
       assert.deepEqual(entry.kinds, ['frontend', 'database', 'external']);
       assert.deepEqual(entry.labels, ['Reader <UI> & ops', 'Database', 'Future integration']);
@@ -1466,7 +1466,7 @@ try {
       }
       var identity = JSON.stringify(Archify.routeProbe.exportSnapshot());
       var results = [];
-      for (var preset of ['classic', 'signal-flow', 'blueprint', 'editorial']) {
+      for (var preset of ['classic', 'signal-flow', 'blueprint', 'editorial', 'kiro']) {
         if (!Archify.preset.apply(preset)) throw new Error('could not apply preset ' + preset);
         for (var theme of ['dark', 'light']) {
           document.documentElement.setAttribute('data-theme', theme);
@@ -1493,7 +1493,7 @@ try {
       return { identity: identity, results: results };
     })()`, true), 20_000, `${label} Route visual matrix`);
 
-    assert.equal(matrix.results.length, 8);
+    assert.equal(matrix.results.length, 10);
     for (const result of matrix.results) {
       assert.equal(result.type, 'image/png', `${label} ${result.preset}/${result.theme} MIME`);
       assert.equal(result.width, 1200, `${label} ${result.preset}/${result.theme} width`);
@@ -1501,8 +1501,8 @@ try {
       assert.ok(result.size > 20_000, `${label} ${result.preset}/${result.theme} is unexpectedly small`);
       assert.equal(result.identity, matrix.identity, `${label} ${result.preset}/${result.theme} changed route identity`);
     }
-    assert.equal(new Set(matrix.results.map((result) => result.hash)).size, 8, `${label} presets/themes should produce eight distinct PNGs`);
-    console.log(`ok ${label} Route visual matrix: Classic/Flow/Blueprint/Editorial x dark/light`);
+    assert.equal(new Set(matrix.results.map((result) => result.hash)).size, 10, `${label} presets/themes should produce ten distinct PNGs`);
+    console.log(`ok ${label} Route visual matrix: Classic/Flow/Blueprint/Editorial/Kiro x dark/light`);
   }
 
   async function captureReachShareCard(file, label, originId, direction, options = {}) {
@@ -1617,7 +1617,7 @@ try {
           var matrix = [];
           if (${JSON.stringify(options.matrix === true)}) {
             var identity = JSON.stringify(snapshot);
-            for (var preset of ['classic', 'signal-flow', 'blueprint', 'editorial']) {
+            for (var preset of ['classic', 'signal-flow', 'blueprint', 'editorial', 'kiro']) {
               if (!Archify.preset.apply(preset)) throw new Error('could not apply preset ' + preset);
               for (var theme of ['dark', 'light']) {
                 document.documentElement.setAttribute('data-theme', theme);
@@ -1758,8 +1758,8 @@ try {
     assert.ok(reachPayload.canonicalSize > 20_000);
     assert.equal(reachPayload.canonicalReachResidue, false);
     if (options.matrix) {
-      assert.equal(reachPayload.matrix.length, 8);
-      assert.equal(new Set(reachPayload.matrix.map((entry) => entry.hash)).size, 8, `${label} Reach presets/themes should produce eight distinct PNGs`);
+      assert.equal(reachPayload.matrix.length, 10);
+      assert.equal(new Set(reachPayload.matrix.map((entry) => entry.hash)).size, 10, `${label} Reach presets/themes should produce ten distinct PNGs`);
       for (const entry of reachPayload.matrix) {
         assert.equal(entry.type, 'image/png');
         assert.equal(entry.width, 1200);
