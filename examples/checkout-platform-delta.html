@@ -9799,6 +9799,381 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       svg [data-node-id], svg [data-edge-from], svg [data-detail], svg [data-detail-anchor], svg [data-legend-hit], svg { transition: none !important; }
     }
   &lt;/style&gt;
+  &lt;style&gt;
+    /* ==========================================================
+       KIRO BRAND — this fork&#39;s identity layer. It re-tints every
+       Archify style (Classic, Signal Flow, Blueprint, Editorial) and
+       both color modes with Kiro&#39;s palette, tags, and ghost, while each
+       style keeps its own geometry, typography, and texture. It lives
+       in this one block, placed last, so upstream updates merge cleanly.
+       Colors follow the Kiro IDE&#39;s Kiro Dark / Kiro Light themes.
+       Keep data-theme off the diagram svg element: these (0,2,0) blocks would
+       outrank the resolved variables export.js injects for the chosen theme.
+       ========================================================== */
+    /* Classic: the Kiro IDE themes. Every style inherits these syntax colors;
+       the style blocks below change only surfaces and accents. */
+    [data-preset][data-theme=&quot;dark&quot;] {
+      --bg: #211d25;
+      --grid: #2d2833;
+      --panel: rgba(40, 36, 46, 0.78);
+      --panel-border: #3d3845;
+      --lane-fill: rgba(40, 36, 46, 0.42);
+      --lane-stroke: #4a464f;
+      --text: #ffffff;
+      --text-muted: #b3aebb;
+      --text-dim: #5f5968;
+      --text-faint: #948e9c;
+      --mask: #28242e;
+      --arrow: #7c7585;
+      --arrow-emphasis: #b080ff;
+      --toolbar-bg: rgba(40, 36, 46, 0.9);
+      --toolbar-border: #4a464f;
+      --toolbar-text: #f2f1f4;
+      --toolbar-hover: #352f3d;
+      --toolbar-menu-bg: #28242e;
+      --kiro-tag-bg: #352f3d;
+      --kiro-tag-border: #4a464f;
+      --frontend-fill: rgba(128, 244, 255, 0.1);
+      --frontend-stroke: #80f4ff;
+      --backend-fill: rgba(128, 255, 181, 0.1);
+      --backend-stroke: #80ffb5;
+      --database-fill: rgba(176, 128, 255, 0.16);
+      --database-stroke: #c2a0fd;
+      --cloud-fill: rgba(255, 242, 179, 0.1);
+      --cloud-stroke: #fff2b3;
+      --security-fill: rgba(255, 128, 181, 0.12);
+      --security-stroke: #ff80b5;
+      --messagebus-fill: rgba(255, 207, 153, 0.11);
+      --messagebus-stroke: #ffcf99;
+      --external-fill: rgba(141, 200, 251, 0.1);
+      --external-stroke: #8dc8fb;
+    }
+    [data-preset][data-theme=&quot;light&quot;] {
+      --bg: #f2f1f4;
+      --grid: #e2e0e6;
+      --panel: #ffffff;
+      --panel-border: #d6d3da;
+      --lane-fill: rgba(234, 232, 237, 0.6);
+      --lane-stroke: #c1bec6;
+      --text: #352f3d;
+      --text-muted: #6f6878;
+      --text-dim: #aaa5b1;
+      --text-faint: #6f6878;
+      --mask: #ffffff;
+      --arrow: #9c97a3;
+      --arrow-emphasis: #7138cc;
+      --toolbar-bg: rgba(255, 255, 255, 0.94);
+      --toolbar-border: #c1bec6;
+      --toolbar-text: #352f3d;
+      --toolbar-hover: #eae8ed;
+      --toolbar-menu-bg: #ffffff;
+      --kiro-tag-bg: #eae8ed;
+      --kiro-tag-border: #c1bec6;
+      --frontend-fill: rgba(12, 154, 167, 0.08);
+      --frontend-stroke: #0b8793;
+      --backend-fill: rgba(22, 128, 82, 0.08);
+      --backend-stroke: #16805a;
+      --database-fill: rgba(113, 56, 204, 0.09);
+      --database-stroke: #7138cc;
+      --cloud-fill: rgba(176, 138, 10, 0.09);
+      --cloud-stroke: #9a7a08;
+      --security-fill: rgba(200, 14, 92, 0.08);
+      --security-stroke: #c80e5c;
+      --messagebus-fill: rgba(208, 128, 37, 0.09);
+      --messagebus-stroke: #b06a1c;
+      --external-fill: rgba(45, 106, 159, 0.08);
+      --external-stroke: #2d6a9f;
+    }
+    /* Signal Flow: deeper charcoal so the syntax colors glow. */
+    [data-preset=&quot;signal-flow&quot;][data-theme=&quot;dark&quot;] {
+      --bg: #141117;
+      --grid: #241f2b;
+      --panel: rgba(26, 22, 32, 0.8);
+      --panel-border: #352d42;
+      --lane-fill: rgba(30, 25, 38, 0.5);
+      --lane-stroke: #443a55;
+      --text: #fbf8ff;
+      --text-muted: #b6accb;
+      --text-dim: #5d5470;
+      --text-faint: #8f86a3;
+      --mask: #1a1620;
+      --arrow: #8a7fa3;
+      --arrow-emphasis: #c099ff;
+      --toolbar-bg: rgba(26, 22, 32, 0.88);
+      --toolbar-border: #3d3450;
+      --toolbar-text: #f2eefb;
+      --toolbar-hover: #2a2334;
+      --toolbar-menu-bg: #1a1620;
+      --kiro-tag-bg: #2a2334;
+      --kiro-tag-border: #443a55;
+    }
+    [data-preset=&quot;signal-flow&quot;][data-theme=&quot;light&quot;] {
+      --bg: #f8f6fc;
+      --grid: #e6e0f1;
+      --panel: rgba(255, 255, 255, 0.84);
+      --panel-border: #d9cfee;
+      --lane-fill: rgba(240, 235, 250, 0.62);
+      --lane-stroke: #c7badf;
+      --text: #2a2235;
+      --text-muted: #645a78;
+      --text-dim: #a59bb8;
+      --text-faint: #6d6382;
+      --mask: #ffffff;
+      --arrow: #9a8fb2;
+      --arrow-emphasis: #8e47ff;
+      --toolbar-bg: rgba(255, 255, 255, 0.92);
+      --toolbar-border: #d3c8ea;
+      --toolbar-text: #352f3d;
+      --toolbar-hover: #ffffff;
+      --toolbar-menu-bg: #ffffff;
+      --kiro-tag-bg: #f0ebfa;
+      --kiro-tag-border: #d3c8ea;
+    }
+    /* Blueprint: violet drafting grid with crisper contrast. */
+    [data-preset=&quot;blueprint&quot;][data-theme=&quot;dark&quot;] {
+      --bg: #1b1722;
+      --grid: #3a3148;
+      --panel: rgba(36, 30, 46, 0.92);
+      --panel-border: #554870;
+      --lane-fill: rgba(46, 38, 60, 0.36);
+      --lane-stroke: #5f5180;
+      --text: #f3eeff;
+      --text-muted: #b9aed4;
+      --text-dim: #6a5f84;
+      --text-faint: #9c91b8;
+      --mask: #241e2e;
+      --arrow: #9a8fb8;
+      --arrow-emphasis: #b080ff;
+      --toolbar-bg: rgba(36, 30, 46, 0.92);
+      --toolbar-border: #5f5180;
+      --toolbar-text: #ece6fb;
+      --toolbar-hover: #2f2740;
+      --toolbar-menu-bg: #241e2e;
+      --kiro-tag-bg: #2f2740;
+      --kiro-tag-border: #5f5180;
+    }
+    [data-preset=&quot;blueprint&quot;][data-theme=&quot;light&quot;] {
+      --bg: #efecf5;
+      --grid: #cfc6e0;
+      --panel: rgba(252, 251, 255, 0.94);
+      --panel-border: #a99bc8;
+      --lane-fill: rgba(224, 217, 238, 0.42);
+      --lane-stroke: #ae9fcc;
+      --text: #261f36;
+      --text-muted: #5e5476;
+      --text-dim: #978db0;
+      --text-faint: #6d6388;
+      --mask: #fcfbff;
+      --arrow: #8f84ad;
+      --arrow-emphasis: #7138cc;
+      --toolbar-bg: rgba(250, 248, 255, 0.94);
+      --toolbar-border: #b5a8d2;
+      --toolbar-text: #352f3d;
+      --toolbar-hover: #ffffff;
+      --toolbar-menu-bg: #fcfbff;
+      --kiro-tag-bg: #ebe6f5;
+      --kiro-tag-border: #b5a8d2;
+    }
+    /* Editorial: lavender paper and ink, muted syntax, Kiro pink accent. */
+    [data-preset=&quot;editorial&quot;][data-theme=&quot;dark&quot;] {
+      --bg: #1d1a20;
+      --grid: #34303a;
+      --panel: rgba(38, 34, 43, 0.96);
+      --panel-border: #5a5463;
+      --lane-fill: rgba(48, 43, 54, 0.46);
+      --lane-stroke: #6a6374;
+      --text: #f3f0f6;
+      --text-muted: #b8b1c1;
+      --text-dim: #736c7d;
+      --text-faint: #9a93a4;
+      --mask: #26222b;
+      --arrow: #948d9e;
+      --arrow-emphasis: #ff80b5;
+      --toolbar-bg: rgba(38, 34, 43, 0.92);
+      --toolbar-border: #5a5463;
+      --toolbar-text: #ece8f0;
+      --toolbar-hover: #2e2a34;
+      --toolbar-menu-bg: #26222b;
+      --kiro-tag-bg: #2e2a34;
+      --kiro-tag-border: #5a5463;
+      --frontend-fill: rgba(128, 244, 255, 0.08);
+      --frontend-stroke: #8fd6de;
+      --backend-fill: rgba(128, 255, 181, 0.08);
+      --backend-stroke: #94d8b0;
+      --database-fill: rgba(176, 128, 255, 0.12);
+      --database-stroke: #bba6e0;
+      --cloud-fill: rgba(255, 242, 179, 0.08);
+      --cloud-stroke: #e3d9a6;
+      --security-fill: rgba(255, 128, 181, 0.1);
+      --security-stroke: #e59ab9;
+      --messagebus-fill: rgba(255, 207, 153, 0.09);
+      --messagebus-stroke: #e3bd93;
+      --external-fill: rgba(141, 200, 251, 0.08);
+      --external-stroke: #9fbcd6;
+    }
+    [data-preset=&quot;editorial&quot;][data-theme=&quot;light&quot;] {
+      --bg: #f4f2f6;
+      --grid: #dcd8e0;
+      --panel: rgba(252, 251, 253, 0.97);
+      --panel-border: #c6c0cd;
+      --lane-fill: rgba(230, 226, 235, 0.42);
+      --lane-stroke: #b9b2c1;
+      --text: #2b2630;
+      --text-muted: #6c6575;
+      --text-dim: #a19aa9;
+      --text-faint: #7d7686;
+      --mask: #fcfbfd;
+      --arrow: #8e8796;
+      --arrow-emphasis: #c80e5c;
+      --toolbar-bg: rgba(252, 251, 253, 0.94);
+      --toolbar-border: #c6c0cd;
+      --toolbar-text: #3d3745;
+      --toolbar-hover: #ffffff;
+      --toolbar-menu-bg: #fcfbfd;
+      --kiro-tag-bg: #ebe8ee;
+      --kiro-tag-border: #c6c0cd;
+      --frontend-fill: rgba(12, 154, 167, 0.07);
+      --frontend-stroke: #2f7f87;
+      --backend-fill: rgba(22, 128, 82, 0.07);
+      --backend-stroke: #3a7a5a;
+      --database-fill: rgba(113, 56, 204, 0.07);
+      --database-stroke: #6a4ea3;
+      --cloud-fill: rgba(176, 138, 10, 0.07);
+      --cloud-stroke: #8a7322;
+      --security-fill: rgba(200, 14, 92, 0.07);
+      --security-stroke: #a8395f;
+      --messagebus-fill: rgba(208, 128, 37, 0.07);
+      --messagebus-stroke: #9a6429;
+      --external-fill: rgba(45, 106, 159, 0.07);
+      --external-stroke: #3f6788;
+    }
+
+    @media print {
+      [data-preset][data-theme=&quot;dark&quot;] {
+        --bg: #ffffff; --grid: transparent; --panel: #ffffff; --panel-border: #d6d3da;
+        --lane-fill: rgba(234, 232, 237, 0.6); --lane-stroke: #c1bec6; --text: #352f3d;
+        --text-muted: #6f6878; --text-dim: #aaa5b1; --text-faint: #6f6878; --mask: #ffffff;
+        --arrow: #9c97a3; --arrow-emphasis: #7138cc; --kiro-tag-bg: #eae8ed; --kiro-tag-border: #c1bec6;
+        --frontend-fill: rgba(12, 154, 167, 0.08); --frontend-stroke: #0b8793;
+        --backend-fill: rgba(22, 128, 82, 0.08); --backend-stroke: #16805a;
+        --database-fill: rgba(113, 56, 204, 0.09); --database-stroke: #7138cc;
+        --cloud-fill: rgba(176, 138, 10, 0.09); --cloud-stroke: #9a7a08;
+        --security-fill: rgba(200, 14, 92, 0.08); --security-stroke: #c80e5c;
+        --messagebus-fill: rgba(208, 128, 37, 0.09); --messagebus-stroke: #b06a1c;
+        --external-fill: rgba(45, 106, 159, 0.08); --external-stroke: #2d6a9f;
+      }
+      [data-preset][data-theme=&quot;light&quot;] { --grid: transparent; }
+    }
+
+    html[data-preset]:not([data-preset=&quot;editorial&quot;]) h1,
+    html[data-preset]:not([data-preset=&quot;editorial&quot;]) .card h3,
+    html[data-preset] .subtitle,
+    html[data-preset] .card li,
+    html[data-preset] .card p {
+      font-family: &#39;AWS Diatype&#39;, -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, &#39;Helvetica Neue&#39;, &#39;PingFang SC&#39;, &#39;Microsoft YaHei&#39;, sans-serif;
+    }
+    html[data-preset] .pulse-dot { background-color: var(--arrow-emphasis); border-color: var(--arrow-emphasis); }
+    html[data-preset] ::selection { background: color-mix(in srgb, var(--arrow-emphasis) 28%, transparent); }
+    html[data-preset] :focus-visible { outline-color: #9e61ff; }
+
+    /* Signal Flow paints its glow with literal cyan; swap in Kiro violet and pink. */
+    html[data-preset=&quot;signal-flow&quot;] body {
+      background-image:
+        radial-gradient(circle at 18% -8%, rgba(176, 128, 255, 0.16), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(255, 128, 181, 0.09), transparent 30rem);
+    }
+    html[data-preset=&quot;signal-flow&quot;][data-theme=&quot;light&quot;] body {
+      background-image:
+        radial-gradient(circle at 18% -8%, rgba(142, 71, 255, 0.1), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(200, 14, 92, 0.05), transparent 30rem);
+    }
+    html[data-preset=&quot;signal-flow&quot;] .diagram-container {
+      background: linear-gradient(180deg, rgba(30, 25, 38, 0.86), rgba(18, 15, 22, 0.95));
+    }
+    html[data-preset=&quot;signal-flow&quot;][data-theme=&quot;light&quot;] .diagram-container {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 240, 251, 0.94));
+    }
+    html[data-preset=&quot;signal-flow&quot;] .card {
+      background: linear-gradient(180deg, rgba(32, 27, 41, 0.88), rgba(20, 17, 25, 0.93));
+    }
+    html[data-preset=&quot;signal-flow&quot;][data-theme=&quot;light&quot;] .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(244, 240, 251, 0.9));
+    }
+    /* Keep upstream&#39;s white paper when printing; these gradients come after its reset. */
+    @media print {
+      html[data-preset=&quot;signal-flow&quot;] body { background-image: none; }
+      html[data-preset=&quot;signal-flow&quot;] .diagram-container,
+      html[data-preset=&quot;signal-flow&quot;] .card { background: #ffffff; }
+    }
+    html[data-preset=&quot;signal-flow&quot;] .header-row::after {
+      border-color: color-mix(in srgb, var(--arrow-emphasis) 45%, transparent);
+      background: color-mix(in srgb, var(--arrow-emphasis) 12%, transparent);
+      color: var(--arrow-emphasis);
+    }
+
+    /* Regions stay neutral so Kiro&#39;s charcoal and paper never read as warm. */
+    svg[data-preset] .c-region { fill: color-mix(in srgb, var(--cloud-fill) 30%, transparent); }
+
+    /* Kiro tags: edge labels and boundary labels become rounded chips. They
+       stay opaque because they mask the connectors drawn beneath them. */
+    svg [data-edge-label] &gt; rect.c-mask,
+    svg [data-graph-role=&quot;structural-frame-label-mask&quot;] {
+      fill: var(--kiro-tag-bg);
+      stroke: var(--kiro-tag-border);
+      stroke-width: 0.75;
+      rx: 7px;
+    }
+
+    /* The Kiro ghost sits in the diagram&#39;s top-right corner. It is page
+       chrome outside the SVG, so exports and geometry are untouched. Its
+       eyes are holes in one mask image, so the theme tints it and the panel
+       shows through as eyes; the image blinks and glances toward the diagram. */
+    .kiro-ghost {
+      position: absolute;
+      z-index: 10;
+      top: 0.9rem;
+      right: 1.3rem;
+      width: 1.9rem;
+      height: 2.85rem;
+      pointer-events: none;
+    }
+    .kiro-ghost::before,
+    .kiro-ghost::after { content: &quot;&quot;; position: absolute; left: 0; right: 0; }
+    .kiro-ghost::before {
+      top: 0;
+      height: 2.3rem;
+      background: #fff;
+      mask: url(&quot;data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27262 190 676 820%27%3E%3Cmask id=%27m%27%3E%3Cpath d=%27M398.554 818.914C316.315 1001.03 491.477 1046.74 620.672 940.156C658.687 1059.66 801.052 970.473 852.234 877.795C964.787 673.567 919.318 465.357 907.64 422.374C827.637 129.443 427.623 128.946 358.8 423.865C342.651 475.544 342.402 534.18 333.458 595.051C328.986 625.86 325.507 645.488 313.83 677.785C306.873 696.424 297.68 712.819 282.773 740.645C259.915 783.881 269.604 867.113 387.87 823.883L399.051 818.914H398.554Z%27 fill=%27%23fff%27/%3E%3Cg fill=%27%23000%27%3E%3Cg transform=%27translate%280 487%29%27%3E%3Cg%3E%3CanimateTransform attributeName=%27transform%27 type=%27scale%27 dur=%277s%27 repeatCount=%27indefinite%27 keyTimes=%270;.62;.64;.66;.9;.92;.94;.96;.98;1%27 values=%271 1;1 1;1 .1;1 1;1 1;1 .1;1 1;1 .1;1 1;1 1%27/%3E%3Cg transform=%27translate%280 -487%29%27%3E%3Cg%3E%3CanimateTransform attributeName=%27transform%27 type=%27translate%27 dur=%277s%27 repeatCount=%27indefinite%27 additive=%27sum%27 keyTimes=%270;.2;.24;.44;.48;1%27 values=%270 0;0 0;-34 6;-34 6;0 0;0 0%27/%3E%3Cpath d=%27M636.123 549.353C603.328 549.353 598.359 510.097 598.359 486.742C598.359 465.623 602.086 448.977 609.293 438.293C615.504 428.852 624.697 424.131 636.123 424.131C647.555 424.131 657.492 428.852 664.447 438.541C672.398 449.474 676.623 466.12 676.623 486.742C676.623 525.998 661.471 549.353 636.375 549.353H636.123Z%27/%3E%3Cpath d=%27M771.24 549.353C738.445 549.353 733.477 510.097 733.477 486.742C733.477 465.623 737.203 448.977 744.41 438.293C750.621 428.852 759.814 424.131 771.24 424.131C782.672 424.131 792.609 428.852 799.564 438.541C807.516 449.474 811.74 466.12 811.74 486.742C811.74 525.998 796.588 549.353 771.492 549.353H771.24Z%27/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/mask%3E%3Crect x=%27262%27 y=%27190%27 width=%27676%27 height=%27820%27 mask=%27url%28%23m%29%27/%3E%3C/svg%3E&quot;) center / contain no-repeat;
+      opacity: 0.92;
+      transition: translate 0.3s ease;
+    }
+    .kiro-ghost::after {
+      bottom: 0;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--arrow-emphasis) 55%, transparent), transparent);
+    }
+    html[data-theme=&quot;light&quot;] .kiro-ghost::before { background: var(--arrow-emphasis); }
+    html[data-preset=&quot;editorial&quot;] .kiro-ghost { top: 2.2rem; }
+    html[data-preset=&quot;blueprint&quot;] .kiro-ghost { top: 1.5rem; right: 2.1rem; }
+    html[data-motion-capable=&quot;true&quot;] .kiro-ghost::before { animation: archify-kiro-ghost-float 3.6s ease-in-out infinite; }
+    html[data-motion-capable=&quot;true&quot;] .kiro-ghost::after { animation: archify-kiro-ghost-shadow 3.6s ease-in-out infinite; }
+    html[data-motion-capable=&quot;true&quot;] .diagram-container:hover .kiro-ghost::before { translate: 0 -0.3rem; }
+    @keyframes archify-kiro-ghost-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    @keyframes archify-kiro-ghost-shadow {
+      0%, 100% { transform: scaleX(1); opacity: 0.9; }
+      50% { transform: scaleX(0.8); opacity: 0.55; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .kiro-ghost::before,
+      .kiro-ghost::after { animation: none !important; translate: none !important; }
+    }
+    html[data-embed=&quot;true&quot;] .kiro-ghost { display: none; }
+    @media print { .kiro-ghost { display: none; } }
+  &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
   &lt;!-- Toolbar: theme, live visual style, trace motion, presentation stage, and export.
@@ -10151,6 +10526,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           &lt;/g&gt;
         &lt;/g&gt;
       &lt;/svg&gt;
+      &lt;span class=&quot;kiro-ghost&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
       &lt;p class=&quot;intent-trace-status no-print&quot; id=&quot;intent-trace-status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot; aria-atomic=&quot;true&quot;&gt;&lt;/p&gt;
       &lt;div class=&quot;share-chapter-cue no-print&quot; id=&quot;share-chapter-cue&quot; hidden role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;
         &lt;div class=&quot;share-chapter-index&quot;&gt;
@@ -25040,6 +25416,381 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       svg [data-node-id], svg [data-edge-from], svg [data-detail], svg [data-detail-anchor], svg [data-legend-hit], svg { transition: none !important; }
     }
   &lt;/style&gt;
+  &lt;style&gt;
+    /* ==========================================================
+       KIRO BRAND — this fork&#39;s identity layer. It re-tints every
+       Archify style (Classic, Signal Flow, Blueprint, Editorial) and
+       both color modes with Kiro&#39;s palette, tags, and ghost, while each
+       style keeps its own geometry, typography, and texture. It lives
+       in this one block, placed last, so upstream updates merge cleanly.
+       Colors follow the Kiro IDE&#39;s Kiro Dark / Kiro Light themes.
+       Keep data-theme off the diagram svg element: these (0,2,0) blocks would
+       outrank the resolved variables export.js injects for the chosen theme.
+       ========================================================== */
+    /* Classic: the Kiro IDE themes. Every style inherits these syntax colors;
+       the style blocks below change only surfaces and accents. */
+    [data-preset][data-theme=&quot;dark&quot;] {
+      --bg: #211d25;
+      --grid: #2d2833;
+      --panel: rgba(40, 36, 46, 0.78);
+      --panel-border: #3d3845;
+      --lane-fill: rgba(40, 36, 46, 0.42);
+      --lane-stroke: #4a464f;
+      --text: #ffffff;
+      --text-muted: #b3aebb;
+      --text-dim: #5f5968;
+      --text-faint: #948e9c;
+      --mask: #28242e;
+      --arrow: #7c7585;
+      --arrow-emphasis: #b080ff;
+      --toolbar-bg: rgba(40, 36, 46, 0.9);
+      --toolbar-border: #4a464f;
+      --toolbar-text: #f2f1f4;
+      --toolbar-hover: #352f3d;
+      --toolbar-menu-bg: #28242e;
+      --kiro-tag-bg: #352f3d;
+      --kiro-tag-border: #4a464f;
+      --frontend-fill: rgba(128, 244, 255, 0.1);
+      --frontend-stroke: #80f4ff;
+      --backend-fill: rgba(128, 255, 181, 0.1);
+      --backend-stroke: #80ffb5;
+      --database-fill: rgba(176, 128, 255, 0.16);
+      --database-stroke: #c2a0fd;
+      --cloud-fill: rgba(255, 242, 179, 0.1);
+      --cloud-stroke: #fff2b3;
+      --security-fill: rgba(255, 128, 181, 0.12);
+      --security-stroke: #ff80b5;
+      --messagebus-fill: rgba(255, 207, 153, 0.11);
+      --messagebus-stroke: #ffcf99;
+      --external-fill: rgba(141, 200, 251, 0.1);
+      --external-stroke: #8dc8fb;
+    }
+    [data-preset][data-theme=&quot;light&quot;] {
+      --bg: #f2f1f4;
+      --grid: #e2e0e6;
+      --panel: #ffffff;
+      --panel-border: #d6d3da;
+      --lane-fill: rgba(234, 232, 237, 0.6);
+      --lane-stroke: #c1bec6;
+      --text: #352f3d;
+      --text-muted: #6f6878;
+      --text-dim: #aaa5b1;
+      --text-faint: #6f6878;
+      --mask: #ffffff;
+      --arrow: #9c97a3;
+      --arrow-emphasis: #7138cc;
+      --toolbar-bg: rgba(255, 255, 255, 0.94);
+      --toolbar-border: #c1bec6;
+      --toolbar-text: #352f3d;
+      --toolbar-hover: #eae8ed;
+      --toolbar-menu-bg: #ffffff;
+      --kiro-tag-bg: #eae8ed;
+      --kiro-tag-border: #c1bec6;
+      --frontend-fill: rgba(12, 154, 167, 0.08);
+      --frontend-stroke: #0b8793;
+      --backend-fill: rgba(22, 128, 82, 0.08);
+      --backend-stroke: #16805a;
+      --database-fill: rgba(113, 56, 204, 0.09);
+      --database-stroke: #7138cc;
+      --cloud-fill: rgba(176, 138, 10, 0.09);
+      --cloud-stroke: #9a7a08;
+      --security-fill: rgba(200, 14, 92, 0.08);
+      --security-stroke: #c80e5c;
+      --messagebus-fill: rgba(208, 128, 37, 0.09);
+      --messagebus-stroke: #b06a1c;
+      --external-fill: rgba(45, 106, 159, 0.08);
+      --external-stroke: #2d6a9f;
+    }
+    /* Signal Flow: deeper charcoal so the syntax colors glow. */
+    [data-preset=&quot;signal-flow&quot;][data-theme=&quot;dark&quot;] {
+      --bg: #141117;
+      --grid: #241f2b;
+      --panel: rgba(26, 22, 32, 0.8);
+      --panel-border: #352d42;
+      --lane-fill: rgba(30, 25, 38, 0.5);
+      --lane-stroke: #443a55;
+      --text: #fbf8ff;
+      --text-muted: #b6accb;
+      --text-dim: #5d5470;
+      --text-faint: #8f86a3;
+      --mask: #1a1620;
+      --arrow: #8a7fa3;
+      --arrow-emphasis: #c099ff;
+      --toolbar-bg: rgba(26, 22, 32, 0.88);
+      --toolbar-border: #3d3450;
+      --toolbar-text: #f2eefb;
+      --toolbar-hover: #2a2334;
+      --toolbar-menu-bg: #1a1620;
+      --kiro-tag-bg: #2a2334;
+      --kiro-tag-border: #443a55;
+    }
+    [data-preset=&quot;signal-flow&quot;][data-theme=&quot;light&quot;] {
+      --bg: #f8f6fc;
+      --grid: #e6e0f1;
+      --panel: rgba(255, 255, 255, 0.84);
+      --panel-border: #d9cfee;
+      --lane-fill: rgba(240, 235, 250, 0.62);
+      --lane-stroke: #c7badf;
+      --text: #2a2235;
+      --text-muted: #645a78;
+      --text-dim: #a59bb8;
+      --text-faint: #6d6382;
+      --mask: #ffffff;
+      --arrow: #9a8fb2;
+      --arrow-emphasis: #8e47ff;
+      --toolbar-bg: rgba(255, 255, 255, 0.92);
+      --toolbar-border: #d3c8ea;
+      --toolbar-text: #352f3d;
+      --toolbar-hover: #ffffff;
+      --toolbar-menu-bg: #ffffff;
+      --kiro-tag-bg: #f0ebfa;
+      --kiro-tag-border: #d3c8ea;
+    }
+    /* Blueprint: violet drafting grid with crisper contrast. */
+    [data-preset=&quot;blueprint&quot;][data-theme=&quot;dark&quot;] {
+      --bg: #1b1722;
+      --grid: #3a3148;
+      --panel: rgba(36, 30, 46, 0.92);
+      --panel-border: #554870;
+      --lane-fill: rgba(46, 38, 60, 0.36);
+      --lane-stroke: #5f5180;
+      --text: #f3eeff;
+      --text-muted: #b9aed4;
+      --text-dim: #6a5f84;
+      --text-faint: #9c91b8;
+      --mask: #241e2e;
+      --arrow: #9a8fb8;
+      --arrow-emphasis: #b080ff;
+      --toolbar-bg: rgba(36, 30, 46, 0.92);
+      --toolbar-border: #5f5180;
+      --toolbar-text: #ece6fb;
+      --toolbar-hover: #2f2740;
+      --toolbar-menu-bg: #241e2e;
+      --kiro-tag-bg: #2f2740;
+      --kiro-tag-border: #5f5180;
+    }
+    [data-preset=&quot;blueprint&quot;][data-theme=&quot;light&quot;] {
+      --bg: #efecf5;
+      --grid: #cfc6e0;
+      --panel: rgba(252, 251, 255, 0.94);
+      --panel-border: #a99bc8;
+      --lane-fill: rgba(224, 217, 238, 0.42);
+      --lane-stroke: #ae9fcc;
+      --text: #261f36;
+      --text-muted: #5e5476;
+      --text-dim: #978db0;
+      --text-faint: #6d6388;
+      --mask: #fcfbff;
+      --arrow: #8f84ad;
+      --arrow-emphasis: #7138cc;
+      --toolbar-bg: rgba(250, 248, 255, 0.94);
+      --toolbar-border: #b5a8d2;
+      --toolbar-text: #352f3d;
+      --toolbar-hover: #ffffff;
+      --toolbar-menu-bg: #fcfbff;
+      --kiro-tag-bg: #ebe6f5;
+      --kiro-tag-border: #b5a8d2;
+    }
+    /* Editorial: lavender paper and ink, muted syntax, Kiro pink accent. */
+    [data-preset=&quot;editorial&quot;][data-theme=&quot;dark&quot;] {
+      --bg: #1d1a20;
+      --grid: #34303a;
+      --panel: rgba(38, 34, 43, 0.96);
+      --panel-border: #5a5463;
+      --lane-fill: rgba(48, 43, 54, 0.46);
+      --lane-stroke: #6a6374;
+      --text: #f3f0f6;
+      --text-muted: #b8b1c1;
+      --text-dim: #736c7d;
+      --text-faint: #9a93a4;
+      --mask: #26222b;
+      --arrow: #948d9e;
+      --arrow-emphasis: #ff80b5;
+      --toolbar-bg: rgba(38, 34, 43, 0.92);
+      --toolbar-border: #5a5463;
+      --toolbar-text: #ece8f0;
+      --toolbar-hover: #2e2a34;
+      --toolbar-menu-bg: #26222b;
+      --kiro-tag-bg: #2e2a34;
+      --kiro-tag-border: #5a5463;
+      --frontend-fill: rgba(128, 244, 255, 0.08);
+      --frontend-stroke: #8fd6de;
+      --backend-fill: rgba(128, 255, 181, 0.08);
+      --backend-stroke: #94d8b0;
+      --database-fill: rgba(176, 128, 255, 0.12);
+      --database-stroke: #bba6e0;
+      --cloud-fill: rgba(255, 242, 179, 0.08);
+      --cloud-stroke: #e3d9a6;
+      --security-fill: rgba(255, 128, 181, 0.1);
+      --security-stroke: #e59ab9;
+      --messagebus-fill: rgba(255, 207, 153, 0.09);
+      --messagebus-stroke: #e3bd93;
+      --external-fill: rgba(141, 200, 251, 0.08);
+      --external-stroke: #9fbcd6;
+    }
+    [data-preset=&quot;editorial&quot;][data-theme=&quot;light&quot;] {
+      --bg: #f4f2f6;
+      --grid: #dcd8e0;
+      --panel: rgba(252, 251, 253, 0.97);
+      --panel-border: #c6c0cd;
+      --lane-fill: rgba(230, 226, 235, 0.42);
+      --lane-stroke: #b9b2c1;
+      --text: #2b2630;
+      --text-muted: #6c6575;
+      --text-dim: #a19aa9;
+      --text-faint: #7d7686;
+      --mask: #fcfbfd;
+      --arrow: #8e8796;
+      --arrow-emphasis: #c80e5c;
+      --toolbar-bg: rgba(252, 251, 253, 0.94);
+      --toolbar-border: #c6c0cd;
+      --toolbar-text: #3d3745;
+      --toolbar-hover: #ffffff;
+      --toolbar-menu-bg: #fcfbfd;
+      --kiro-tag-bg: #ebe8ee;
+      --kiro-tag-border: #c6c0cd;
+      --frontend-fill: rgba(12, 154, 167, 0.07);
+      --frontend-stroke: #2f7f87;
+      --backend-fill: rgba(22, 128, 82, 0.07);
+      --backend-stroke: #3a7a5a;
+      --database-fill: rgba(113, 56, 204, 0.07);
+      --database-stroke: #6a4ea3;
+      --cloud-fill: rgba(176, 138, 10, 0.07);
+      --cloud-stroke: #8a7322;
+      --security-fill: rgba(200, 14, 92, 0.07);
+      --security-stroke: #a8395f;
+      --messagebus-fill: rgba(208, 128, 37, 0.07);
+      --messagebus-stroke: #9a6429;
+      --external-fill: rgba(45, 106, 159, 0.07);
+      --external-stroke: #3f6788;
+    }
+
+    @media print {
+      [data-preset][data-theme=&quot;dark&quot;] {
+        --bg: #ffffff; --grid: transparent; --panel: #ffffff; --panel-border: #d6d3da;
+        --lane-fill: rgba(234, 232, 237, 0.6); --lane-stroke: #c1bec6; --text: #352f3d;
+        --text-muted: #6f6878; --text-dim: #aaa5b1; --text-faint: #6f6878; --mask: #ffffff;
+        --arrow: #9c97a3; --arrow-emphasis: #7138cc; --kiro-tag-bg: #eae8ed; --kiro-tag-border: #c1bec6;
+        --frontend-fill: rgba(12, 154, 167, 0.08); --frontend-stroke: #0b8793;
+        --backend-fill: rgba(22, 128, 82, 0.08); --backend-stroke: #16805a;
+        --database-fill: rgba(113, 56, 204, 0.09); --database-stroke: #7138cc;
+        --cloud-fill: rgba(176, 138, 10, 0.09); --cloud-stroke: #9a7a08;
+        --security-fill: rgba(200, 14, 92, 0.08); --security-stroke: #c80e5c;
+        --messagebus-fill: rgba(208, 128, 37, 0.09); --messagebus-stroke: #b06a1c;
+        --external-fill: rgba(45, 106, 159, 0.08); --external-stroke: #2d6a9f;
+      }
+      [data-preset][data-theme=&quot;light&quot;] { --grid: transparent; }
+    }
+
+    html[data-preset]:not([data-preset=&quot;editorial&quot;]) h1,
+    html[data-preset]:not([data-preset=&quot;editorial&quot;]) .card h3,
+    html[data-preset] .subtitle,
+    html[data-preset] .card li,
+    html[data-preset] .card p {
+      font-family: &#39;AWS Diatype&#39;, -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, &#39;Helvetica Neue&#39;, &#39;PingFang SC&#39;, &#39;Microsoft YaHei&#39;, sans-serif;
+    }
+    html[data-preset] .pulse-dot { background-color: var(--arrow-emphasis); border-color: var(--arrow-emphasis); }
+    html[data-preset] ::selection { background: color-mix(in srgb, var(--arrow-emphasis) 28%, transparent); }
+    html[data-preset] :focus-visible { outline-color: #9e61ff; }
+
+    /* Signal Flow paints its glow with literal cyan; swap in Kiro violet and pink. */
+    html[data-preset=&quot;signal-flow&quot;] body {
+      background-image:
+        radial-gradient(circle at 18% -8%, rgba(176, 128, 255, 0.16), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(255, 128, 181, 0.09), transparent 30rem);
+    }
+    html[data-preset=&quot;signal-flow&quot;][data-theme=&quot;light&quot;] body {
+      background-image:
+        radial-gradient(circle at 18% -8%, rgba(142, 71, 255, 0.1), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(200, 14, 92, 0.05), transparent 30rem);
+    }
+    html[data-preset=&quot;signal-flow&quot;] .diagram-container {
+      background: linear-gradient(180deg, rgba(30, 25, 38, 0.86), rgba(18, 15, 22, 0.95));
+    }
+    html[data-preset=&quot;signal-flow&quot;][data-theme=&quot;light&quot;] .diagram-container {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 240, 251, 0.94));
+    }
+    html[data-preset=&quot;signal-flow&quot;] .card {
+      background: linear-gradient(180deg, rgba(32, 27, 41, 0.88), rgba(20, 17, 25, 0.93));
+    }
+    html[data-preset=&quot;signal-flow&quot;][data-theme=&quot;light&quot;] .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(244, 240, 251, 0.9));
+    }
+    /* Keep upstream&#39;s white paper when printing; these gradients come after its reset. */
+    @media print {
+      html[data-preset=&quot;signal-flow&quot;] body { background-image: none; }
+      html[data-preset=&quot;signal-flow&quot;] .diagram-container,
+      html[data-preset=&quot;signal-flow&quot;] .card { background: #ffffff; }
+    }
+    html[data-preset=&quot;signal-flow&quot;] .header-row::after {
+      border-color: color-mix(in srgb, var(--arrow-emphasis) 45%, transparent);
+      background: color-mix(in srgb, var(--arrow-emphasis) 12%, transparent);
+      color: var(--arrow-emphasis);
+    }
+
+    /* Regions stay neutral so Kiro&#39;s charcoal and paper never read as warm. */
+    svg[data-preset] .c-region { fill: color-mix(in srgb, var(--cloud-fill) 30%, transparent); }
+
+    /* Kiro tags: edge labels and boundary labels become rounded chips. They
+       stay opaque because they mask the connectors drawn beneath them. */
+    svg [data-edge-label] &gt; rect.c-mask,
+    svg [data-graph-role=&quot;structural-frame-label-mask&quot;] {
+      fill: var(--kiro-tag-bg);
+      stroke: var(--kiro-tag-border);
+      stroke-width: 0.75;
+      rx: 7px;
+    }
+
+    /* The Kiro ghost sits in the diagram&#39;s top-right corner. It is page
+       chrome outside the SVG, so exports and geometry are untouched. Its
+       eyes are holes in one mask image, so the theme tints it and the panel
+       shows through as eyes; the image blinks and glances toward the diagram. */
+    .kiro-ghost {
+      position: absolute;
+      z-index: 10;
+      top: 0.9rem;
+      right: 1.3rem;
+      width: 1.9rem;
+      height: 2.85rem;
+      pointer-events: none;
+    }
+    .kiro-ghost::before,
+    .kiro-ghost::after { content: &quot;&quot;; position: absolute; left: 0; right: 0; }
+    .kiro-ghost::before {
+      top: 0;
+      height: 2.3rem;
+      background: #fff;
+      mask: url(&quot;data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27262 190 676 820%27%3E%3Cmask id=%27m%27%3E%3Cpath d=%27M398.554 818.914C316.315 1001.03 491.477 1046.74 620.672 940.156C658.687 1059.66 801.052 970.473 852.234 877.795C964.787 673.567 919.318 465.357 907.64 422.374C827.637 129.443 427.623 128.946 358.8 423.865C342.651 475.544 342.402 534.18 333.458 595.051C328.986 625.86 325.507 645.488 313.83 677.785C306.873 696.424 297.68 712.819 282.773 740.645C259.915 783.881 269.604 867.113 387.87 823.883L399.051 818.914H398.554Z%27 fill=%27%23fff%27/%3E%3Cg fill=%27%23000%27%3E%3Cg transform=%27translate%280 487%29%27%3E%3Cg%3E%3CanimateTransform attributeName=%27transform%27 type=%27scale%27 dur=%277s%27 repeatCount=%27indefinite%27 keyTimes=%270;.62;.64;.66;.9;.92;.94;.96;.98;1%27 values=%271 1;1 1;1 .1;1 1;1 1;1 .1;1 1;1 .1;1 1;1 1%27/%3E%3Cg transform=%27translate%280 -487%29%27%3E%3Cg%3E%3CanimateTransform attributeName=%27transform%27 type=%27translate%27 dur=%277s%27 repeatCount=%27indefinite%27 additive=%27sum%27 keyTimes=%270;.2;.24;.44;.48;1%27 values=%270 0;0 0;-34 6;-34 6;0 0;0 0%27/%3E%3Cpath d=%27M636.123 549.353C603.328 549.353 598.359 510.097 598.359 486.742C598.359 465.623 602.086 448.977 609.293 438.293C615.504 428.852 624.697 424.131 636.123 424.131C647.555 424.131 657.492 428.852 664.447 438.541C672.398 449.474 676.623 466.12 676.623 486.742C676.623 525.998 661.471 549.353 636.375 549.353H636.123Z%27/%3E%3Cpath d=%27M771.24 549.353C738.445 549.353 733.477 510.097 733.477 486.742C733.477 465.623 737.203 448.977 744.41 438.293C750.621 428.852 759.814 424.131 771.24 424.131C782.672 424.131 792.609 428.852 799.564 438.541C807.516 449.474 811.74 466.12 811.74 486.742C811.74 525.998 796.588 549.353 771.492 549.353H771.24Z%27/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/mask%3E%3Crect x=%27262%27 y=%27190%27 width=%27676%27 height=%27820%27 mask=%27url%28%23m%29%27/%3E%3C/svg%3E&quot;) center / contain no-repeat;
+      opacity: 0.92;
+      transition: translate 0.3s ease;
+    }
+    .kiro-ghost::after {
+      bottom: 0;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--arrow-emphasis) 55%, transparent), transparent);
+    }
+    html[data-theme=&quot;light&quot;] .kiro-ghost::before { background: var(--arrow-emphasis); }
+    html[data-preset=&quot;editorial&quot;] .kiro-ghost { top: 2.2rem; }
+    html[data-preset=&quot;blueprint&quot;] .kiro-ghost { top: 1.5rem; right: 2.1rem; }
+    html[data-motion-capable=&quot;true&quot;] .kiro-ghost::before { animation: archify-kiro-ghost-float 3.6s ease-in-out infinite; }
+    html[data-motion-capable=&quot;true&quot;] .kiro-ghost::after { animation: archify-kiro-ghost-shadow 3.6s ease-in-out infinite; }
+    html[data-motion-capable=&quot;true&quot;] .diagram-container:hover .kiro-ghost::before { translate: 0 -0.3rem; }
+    @keyframes archify-kiro-ghost-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    @keyframes archify-kiro-ghost-shadow {
+      0%, 100% { transform: scaleX(1); opacity: 0.9; }
+      50% { transform: scaleX(0.8); opacity: 0.55; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .kiro-ghost::before,
+      .kiro-ghost::after { animation: none !important; translate: none !important; }
+    }
+    html[data-embed=&quot;true&quot;] .kiro-ghost { display: none; }
+    @media print { .kiro-ghost { display: none; } }
+  &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
   &lt;!-- Toolbar: theme, live visual style, trace motion, presentation stage, and export.
@@ -25397,6 +26148,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           &lt;/g&gt;
         &lt;/g&gt;
       &lt;/svg&gt;
+      &lt;span class=&quot;kiro-ghost&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
       &lt;p class=&quot;intent-trace-status no-print&quot; id=&quot;intent-trace-status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot; aria-atomic=&quot;true&quot;&gt;&lt;/p&gt;
       &lt;div class=&quot;share-chapter-cue no-print&quot; id=&quot;share-chapter-cue&quot; hidden role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;
         &lt;div class=&quot;share-chapter-index&quot;&gt;
